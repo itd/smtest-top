@@ -4,6 +4,15 @@ submodule test top level
 
 ref: https://git-scm.com/book/en/v2/Git-Tools-Submodules
 
+## set up some git config options to make thing happen automagically
+
+    git config --global submodule.recurse true
+
+or, do this:
+
+    git config --global alias.pullall '!git pull && git submodule update --init --recursive'
+
+
 ## Clone the initial top-level repo
 
     git clone git@github.com:itd/smtest-top.git
@@ -46,11 +55,14 @@ Then a `git diff` will do the right thing.
      cd smtest-top/
      ls -la roles/itd.vidbase/
      git status
-     git diff --cached roles/itd.vidbase
 
-However, the 
+### clone the repo and get it all in one line
 
-### Two was to get submodule data loaded
+     git clone --recurse-submodule  git@github.com:itd/smtest-top.git
+     git clone git@github.com:itd/smtest-top.git; cd smtest-top; git submodule init; git submodule update
+
+
+### Two ways to get submodule data loaded
 
     cd roles/itd.vidbase
     git submodule init 
@@ -63,7 +75,7 @@ However, the
 
 This is a bit of a hassle. You *can* do it all in one command.
 
-    git clone --recurse-submodules https://github.com/chaconinc/MainProject
+    git clone --recurse-submodules git@github.com/itd/smtest-top.git
 
 ## Day to day work
 
