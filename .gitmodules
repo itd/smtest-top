@@ -1,0 +1,3 @@
+[submodule "roles/itd.vidbase"]
+	path = roles/itd.vidbase
+	url = https://github.com/itd/itd.vidbase
