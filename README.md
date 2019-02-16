@@ -118,3 +118,27 @@ You can also update submodules individually go into each submodule dir and updat
     git push --recurse-submodules=on-demand
 
   
+
+# Run pre-install ansible plays
+
+A hacky workaround to a specific issue I'm having may be to create 
+a pre-install playbook that runs locally to ensure everything is set up.
+
+It might look like this:
+
+    ansible-playbook -b --limit=somegroup_or_host ./pre-install.yml
+
+
+    ---
+    # pre-install.yml
+    - name: "run some playbook tasks on the localhost"
+      hosts: 127.0.0.1
+      connection: local
+      become: yes
+      tasks:
+       - name: "pull the git repo:
+         git:
+            repo: 'https://github.com/openstack/ansible-hardening.git'
+            dest: ./roles/ansible-hardening
+            #version: stable/rocky
+
